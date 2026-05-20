@@ -21,8 +21,10 @@ jobs:
 
     - name: Install Dependencies
       run: |
+        python -m venv venv
+        source venv/bin/activate
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run Tests
       env:
@@ -30,4 +32,5 @@ jobs:
         DEBUG: "True"
         ALLOWED_HOSTS: "localhost"
       run: |
+        source venv/bin/activate
         python manage.py test
